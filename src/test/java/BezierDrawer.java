@@ -46,13 +46,11 @@ public class BezierDrawer extends Canvas {
                                 double x4, double y4) {
         // определяем, насколько плоская представимая кривая, и если плоская -- рисуем её
         // Попытка аппроксимировать всю кривую одним отрезком//------------------
-        double dx = x4-x1;
-        double dy = y4-y1;
-
-        double d2 = abs(((x2 - x4) * dy - (y2 - y4) * dx));
-        double d3 = abs(((x3 - x4) * dy - (y3 - y4) * dx));
-
-        if((d2 + d3)*(d2 + d3) < m_distance_tolerance * (dx*dx + dy*dy))
+        double a = abs(x1 + x3 - x2 - x2);
+        double b = abs(y1 + y3 - y2 - y2);
+        double c = abs(x2 + x4 - x3 - x3);
+        double d = abs(y2 + y4 - y3 - y3);
+        if(a + b + c + d < m_distance_tolerance)
         {
             // рисуем линию (x1, y1) -> (x4, y4) алгоритмом Брезенхема
             //drawLine((int)x1, (int)x4, (int)y1, (int)y4);
@@ -84,6 +82,7 @@ public class BezierDrawer extends Canvas {
 
     private void drawPoly() {
         int lineCount = poly.size()/2 - 1;
+        System.out.println(poly.size());
         for (int i = 0; i <lineCount; i++) {
             int x0 = poly.get(2*i);
             int y0 = poly.get(2*i + 1);

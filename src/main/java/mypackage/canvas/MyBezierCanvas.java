@@ -7,11 +7,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class MyBezierCanvas extends Canvas {
 
     private long timeEstimated;
 
-    double m_distance_tolerance = 0.25;
+    double m_distance_tolerance_manhattan = 4;
 
     private TextField timeOut;
 
@@ -44,13 +46,11 @@ public class MyBezierCanvas extends Canvas {
     {
 
         // Попытка аппроксимировать всю кривую одним отрезком//------------------
-        double dx = x4-x1;
-        double dy = y4-y1;
-
-        double d2 = Math.abs(((x2 - x4) * dy - (y2 - y4) * dx));
-        double d3 = Math.abs(((x3 - x4) * dy - (y3 - y4) * dx));
-
-        if((d2 + d3)*(d2 + d3) < m_distance_tolerance * (dx*dx + dy*dy))
+        double a = abs(x1 + x3 - x2 - x2);
+        double b = abs(y1 + y3 - y2 - y2);
+        double c = abs(x2 + x4 - x3 - x3);
+        double d = abs(y2 + y4 - y3 - y3);
+        if(a + b + c + d < m_distance_tolerance_manhattan)
         {
             pointList.add(new Point((int) (x2 + x3) / 2, (int) (y2 + y3) / 2));
             return;
