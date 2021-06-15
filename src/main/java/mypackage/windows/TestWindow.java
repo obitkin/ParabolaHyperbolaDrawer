@@ -25,7 +25,7 @@ public class TestWindow {
     private LibBezierCanvas libBezierCanvas;
 
     int windowHeight = 680;
-    int windowWidth = 1370;
+    int windowWidth = 1374;
 
     int canvasWidth = windowWidth / 2 - 2;
     int canvasHeight = windowHeight - 100;

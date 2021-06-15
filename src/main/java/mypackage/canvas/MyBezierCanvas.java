@@ -4,12 +4,8 @@ import mypackage.primitives.Bezier;
 import mypackage.primitives.Point;
 
 import java.awt.*;
-import java.awt.geom.CubicCurve2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Math.abs;
 
 public class MyBezierCanvas extends Canvas {
 
@@ -84,7 +80,7 @@ public class MyBezierCanvas extends Canvas {
     }
 
     public void paint (Graphics g) {
-        long time = System.currentTimeMillis();
+        timeEstimated = System.currentTimeMillis();
         Graphics2D g2;
         g2 = (Graphics2D) g;
 
@@ -102,10 +98,8 @@ public class MyBezierCanvas extends Canvas {
                 drawLine(g2, pointList.get(i), pointList.get(i + 1));
             }
         }
-
-        timeEstimated = (System.currentTimeMillis() - time);
+        timeEstimated = System.currentTimeMillis() - timeEstimated;
         if (timeOut != null)
             timeOut.setText(String.valueOf(timeEstimated));
     }
-
 }
