@@ -1,4 +1,4 @@
-package mypackage;
+package mypackage.primitives;
 
 import java.util.Random;
 

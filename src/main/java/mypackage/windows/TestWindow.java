@@ -1,7 +1,8 @@
 package mypackage.windows;
 
-import mypackage.Bezier;
+import mypackage.primitives.Bezier;
 import mypackage.canvas.LibBezierCanvas;
+import mypackage.canvas.MyBezierCanvas;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -20,8 +21,8 @@ public class TestWindow {
     TextField timeOut1;
     TextField timeOut2;
     Button startTestButton;
-    private LibBezierCanvas bd;
-    private LibBezierCanvas lc;
+    private MyBezierCanvas myBezierCanvas;
+    private LibBezierCanvas libBezierCanvas;
 
     int windowHeight = 680;
     int windowWidth = 1370;
@@ -53,7 +54,7 @@ public class TestWindow {
         Panel row = new Panel(new GridLayout(1, 3));
         messageForInput = new Label("Введите число кривых Безье: ");
         countInput = new TextField(10);
-        countInput.setText("1000");
+        countInput.setText("1");
         startTestButton = new Button("Начать тестирование");
         startTestButton.addActionListener(e -> startComparison());
         startTestButton.setSize(windowWidth, 20);
@@ -127,11 +128,11 @@ public class TestWindow {
         controlPanel1.removeAll();
         controlPanel2.removeAll();
 
-        bd = new LibBezierCanvas(bezierList, canvasWidth, canvasHeight, timeOut1);
-        lc = new LibBezierCanvas(bezierList, canvasWidth, canvasHeight, timeOut2);
+        myBezierCanvas = new MyBezierCanvas(bezierList, canvasWidth, canvasHeight, timeOut1);
+        libBezierCanvas = new LibBezierCanvas(bezierList, canvasWidth, canvasHeight, timeOut2);
 
-        controlPanel1.add(bd);
-        controlPanel2.add(lc);
+        controlPanel1.add(myBezierCanvas);
+        controlPanel2.add(libBezierCanvas);
     }
 
 }

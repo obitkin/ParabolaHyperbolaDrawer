@@ -1,6 +1,6 @@
 package mypackage.canvas;
 
-import mypackage.Bezier;
+import mypackage.primitives.Bezier;
 
 import java.awt.*;
 import java.awt.geom.CubicCurve2D;
