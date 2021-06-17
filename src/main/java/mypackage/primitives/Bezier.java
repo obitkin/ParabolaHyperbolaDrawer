@@ -35,6 +35,38 @@ public class Bezier {
     double x2;
     double y2;
 
+    public double getX1() {
+        return x1;
+    }
+
+    public double getY1() {
+        return y1;
+    }
+
+    public double getCtrlx1() {
+        return ctrlx1;
+    }
+
+    public double getCtrly1() {
+        return ctrly1;
+    }
+
+    public double getCtrlx2() {
+        return ctrlx2;
+    }
+
+    public double getCtrly2() {
+        return ctrly2;
+    }
+
+    public double getX2() {
+        return x2;
+    }
+
+    public double getY2() {
+        return y2;
+    }
+
     public double[] getValues() {
         return new double[] {x1, y1, ctrlx1, ctrly1, ctrlx2, ctrly2, x2, y2};
     }

@@ -2,19 +2,19 @@ package mypackage.primitives;
 
 public class Point {
 
-    public Point(int x, int y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    int x;
-    int y;
+    double x;
+    double y;
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 }
