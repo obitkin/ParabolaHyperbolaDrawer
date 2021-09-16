@@ -17,8 +17,8 @@ public class Drawer {
     private Panel controlPanel;
     private ParabolaCanvas parabolaCanvas;
 
-    JSlider angleOfRotationSlider = new JSlider(JSlider.HORIZONTAL, 0, 90, 0);
-    JSlider numberOfDotsSlider = new JSlider(JSlider.HORIZONTAL, 10, 1000, 10);
+    JSlider angleOfRotationSlider = new JSlider(JSlider.HORIZONTAL, 0, 360, 0);
+    JSlider numberOfDotsSlider = new JSlider(JSlider.HORIZONTAL, 1, 100, 10);
     JSlider parameterSlider = new JSlider(JSlider.HORIZONTAL, 1, 100, 1);
 
     int WINDOW_HEIGHT = 780;
@@ -57,7 +57,7 @@ public class Drawer {
 
         Dictionary<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
         labels.put(0, new JLabel("<html><font color=gray size=3>0"));
-        labels.put(90, new JLabel("<html><font color=gray size=3>90"));
+        labels.put(360, new JLabel("<html><font color=gray size=3>360"));
         angleOfRotationSlider.setLabelTable(labels);
         angleOfRotationSlider.setPaintLabels(true);
         angleOfRotationSlider.addChangeListener(listener -> startDraw());
@@ -65,8 +65,8 @@ public class Drawer {
 
 
         Dictionary<Integer, JLabel> labels2 = new Hashtable<Integer, JLabel>();
-        labels2.put(10, new JLabel("<html><font color=gray size=3>10"));
-        labels2.put(1000, new JLabel("<html><font color=gray size=3>1000"));
+        labels2.put(1, new JLabel("<html><font color=gray size=3>1"));
+        labels2.put(100, new JLabel("<html><font color=gray size=3>100"));
         numberOfDotsSlider.setLabelTable(labels2);
         numberOfDotsSlider.setPaintLabels(true);
         numberOfDotsSlider.addChangeListener(listener -> startDraw());
@@ -86,7 +86,7 @@ public class Drawer {
         controlPanel = new Panel();
         controlPanel.setLayout(new FlowLayout());
         controlPanel.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
-        parabolaCanvas = new ParabolaCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        parabolaCanvas = new ParabolaCanvas(CANVAS_WIDTH / 2, CANVAS_HEIGHT);
 
         constraints.gridy = 2;
         constraints.ipady = WINDOW_HEIGHT - 150;

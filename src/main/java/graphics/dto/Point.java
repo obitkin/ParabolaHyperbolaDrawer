@@ -1,14 +1,14 @@
 package graphics.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
+@ToString
+@AllArgsConstructor
 public class Point {
 
-    double x;
-    double y;
-
-    public Point(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
+    public double x;
+    public double y;
 
     public int getX() {
         return (int) x;
@@ -17,5 +17,10 @@ public class Point {
     public int getY() {
         return (int) y;
     }
+
+    public Point revertY() {
+        return new Point(x, -y);
+    }
+
 }
 
