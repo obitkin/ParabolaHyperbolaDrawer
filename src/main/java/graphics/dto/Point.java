@@ -2,20 +2,20 @@ package graphics.dto;
 
 public class Point {
 
+    double x;
+    double y;
+
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    double x;
-    double y;
-
-    public double getX() {
-        return x;
+    public int getX() {
+        return (int) x;
     }
 
-    public double getY() {
-        return y;
+    public int getY() {
+        return (int) y;
     }
 }
 

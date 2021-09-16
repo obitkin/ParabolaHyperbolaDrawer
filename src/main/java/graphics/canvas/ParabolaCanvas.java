@@ -1,8 +1,10 @@
 package graphics.canvas;
 
 import graphics.graph.ParabolaDrawer;
+import graphics.dto.Point;
 
 import java.awt.*;
+import java.util.List;
 
 public class ParabolaCanvas extends Canvas {
 
@@ -19,7 +21,13 @@ public class ParabolaCanvas extends Canvas {
         Graphics2D g2;
         g2 = (Graphics2D) g;
         System.out.println("Рисуем параболу");
-        g2.draw3DRect(100, 100, 200, 200, true);
+        List<Point> dots = parabolaDrawer.drawParabola();
+        for (int i = 0; i < dots.size(); i++) {
+            drawLine(g2, dots.get(i), dots.get(i + 1));
+        }
+    }
 
+    private void drawLine(Graphics2D graphics2D, Point first, Point second) {
+        graphics2D.drawLine(first.getX(), first.getY(), second.getX(), second.getY());
     }
 }

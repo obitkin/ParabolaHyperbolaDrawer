@@ -60,7 +60,7 @@ public class Drawer {
         labels.put(90, new JLabel("<html><font color=gray size=3>90"));
         angleOfRotationSlider.setLabelTable(labels);
         angleOfRotationSlider.setPaintLabels(true);
-        angleOfRotationSlider.addChangeListener(listenetr -> startDraw());
+        angleOfRotationSlider.addChangeListener(listener -> startDraw());
         rowBot.add(angleOfRotationSlider);
 
 
@@ -69,7 +69,7 @@ public class Drawer {
         labels2.put(1000, new JLabel("<html><font color=gray size=3>1000"));
         numberOfDotsSlider.setLabelTable(labels2);
         numberOfDotsSlider.setPaintLabels(true);
-        numberOfDotsSlider.addChangeListener(listenetr -> startDraw());
+        numberOfDotsSlider.addChangeListener(listener -> startDraw());
         rowBot.add(numberOfDotsSlider);
 
         rowBot.add(parameterSlider);
