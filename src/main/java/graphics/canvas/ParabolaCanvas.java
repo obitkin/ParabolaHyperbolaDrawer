@@ -22,7 +22,7 @@ public class ParabolaCanvas extends Canvas {
         g2 = (Graphics2D) g;
         System.out.println("Рисуем параболу");
         List<Point> dots = parabolaDrawer.drawParabola();
-        for (int i = 0; i < dots.size(); i++) {
+        for (int i = 0; i < dots.size() - 1; i++) {
             drawLine(g2, dots.get(i), dots.get(i + 1));
         }
     }

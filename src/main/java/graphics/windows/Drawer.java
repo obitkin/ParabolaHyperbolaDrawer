@@ -72,6 +72,12 @@ public class Drawer {
         numberOfDotsSlider.addChangeListener(listener -> startDraw());
         rowBot.add(numberOfDotsSlider);
 
+        Dictionary<Integer, JLabel> labels3 = new Hashtable<Integer, JLabel>();
+        labels3.put(1, new JLabel("<html><font color=gray size=3>1"));
+        labels3.put(100, new JLabel("<html><font color=gray size=3>100"));
+        parameterSlider.setLabelTable(labels3);
+        parameterSlider.setPaintLabels(true);
+        parameterSlider.addChangeListener(listener -> startDraw());
         rowBot.add(parameterSlider);
 
         constraints.gridy = 1;
