@@ -15,7 +15,7 @@ public class Drawer {
 
     private Frame mainFrame;
     private Panel controlPanel;
-    private ParabolaCanvas myBezierCanvas;
+    private ParabolaCanvas parabolaCanvas;
 
     JSlider angleOfRotationSlider = new JSlider(JSlider.HORIZONTAL, 0, 90, 0);
     JSlider numberOfDotsSlider = new JSlider(JSlider.HORIZONTAL, 10, 1000, 10);
@@ -51,9 +51,9 @@ public class Drawer {
 
         Panel rowBot = new Panel(new GridLayout(2, 3));
         rowBot.setSize(WINDOW_WIDTH, 60);
-        rowBot.add(new Label("x1"));
-        rowBot.add(new Label("y1"));
-        rowBot.add(new Label("x2"));
+        rowBot.add(new Label("angle of rotation"));
+        rowBot.add(new Label("number of dots"));
+        rowBot.add(new Label("parameter A"));
 
         Dictionary<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
         labels.put(0, new JLabel("<html><font color=gray size=3>0"));
@@ -80,7 +80,7 @@ public class Drawer {
         controlPanel = new Panel();
         controlPanel.setLayout(new FlowLayout());
         controlPanel.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
-        myBezierCanvas = new ParabolaCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        parabolaCanvas = new ParabolaCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
         constraints.gridy = 2;
         constraints.ipady = WINDOW_HEIGHT - 150;
@@ -89,11 +89,14 @@ public class Drawer {
     }
 
     private void startDraw() {
-        System.out.println("++++++++++++++++++++++");
+        System.out.println("Draw");
         controlPanel.removeAll();
-        //myBezierCanvas = new ParabolaCanvas(canvasWidth, CANVAS_HEIGHT);
-        myBezierCanvas.value = angleOfRotationSlider.getValue();
-        controlPanel.add(myBezierCanvas);
+        parabolaCanvas.parabolaDrawer.setParabola(
+                angleOfRotationSlider.getValue(),
+                numberOfDotsSlider.getValue(),
+                parameterSlider.getValue()
+        );
+        controlPanel.add(parabolaCanvas);
     }
 
 }
