@@ -1,10 +1,8 @@
-package graphics.graph;
+package graphics.graph.parabola;
 
 import graphics.dto.Point;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +40,4 @@ public abstract class ParabolaDrawer {
                 .map(point -> new Point(point.getX() + delta_x, point.getY() + delta_y))
                 .collect(Collectors.toList());
     }
-
-
 }

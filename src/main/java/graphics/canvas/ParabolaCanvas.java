@@ -1,6 +1,6 @@
 package graphics.canvas;
 
-import graphics.graph.ParabolaDrawer;
+import graphics.graph.parabola.ParabolaDrawer;
 import graphics.dto.Point;
 import lombok.Setter;
 

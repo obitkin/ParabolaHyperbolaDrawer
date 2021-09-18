@@ -1,6 +1,10 @@
 package graphics.windows;
 
+import graphics.canvas.HyperbolaCanvas;
 import graphics.canvas.ParabolaCanvas;
+import graphics.graph.hyperbola.BestHyperbolaDrawer;
+import graphics.graph.hyperbola.HyperbolaDrawer;
+import graphics.graph.hyperbola.NaIveHyperbolaDrawer;
 import graphics.graph.parabola.BestParabolaDrawer;
 import graphics.graph.parabola.NaiveParabolaDrawer;
 
@@ -11,9 +15,9 @@ import java.awt.event.WindowEvent;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import static java.lang.System.*;
+import static java.lang.System.exit;
 
-public class ParabolasWindow {
+public class HyperbolaWindow {
 
     int WINDOW_HEIGHT = 680;
     int WINDOW_WIDTH = 1300;
@@ -23,31 +27,34 @@ public class ParabolasWindow {
 
     String viewTypeString = "Включить отображение точек графиков: ";
     String numberOfDotsString = "Выберите количество точек: ";
-    String parameterString = "Выберите параметер 'a' уравнения y^2 = 4ax;  a = ";
+    String parameterAString = "Выберите параметер 'a';  a = ";
+    String parameterBString = "Выберите параметер 'b';  b = ";
 
     Frame mainFrame;
 
     TextField viewTypeText = new TextField(viewTypeString);
     TextField numberOfDotsText = new TextField(numberOfDotsString);
-    TextField parameterText = new TextField(parameterString);
+    TextField parameterText = new TextField(parameterAString);
+    TextField parameterBText = new TextField(parameterBString);
 
     Checkbox viewTypeCheckbox = new Checkbox();
     JSlider numberOfDotsSlider = new JSlider(JSlider.HORIZONTAL, 1, 100, 1);
     JSlider parameterSlider = new JSlider(JSlider.HORIZONTAL, 1, 1000, 100);
+    JSlider parameterBSlider = new JSlider(JSlider.HORIZONTAL, 1, 1000, 100);
 
     Panel controlPanel1;
     Panel controlPanel2;
 
-    ParabolaCanvas bestCanvas;
-    ParabolaCanvas naiveCanvas;
+    HyperbolaCanvas bestCanvas;
+    HyperbolaCanvas naiveCanvas;
 
 
-    public ParabolasWindow(){
+    public HyperbolaWindow(){
         prepareGUI();
     }
 
     private void prepareGUI(){
-        mainFrame = new Frame("Parabola drawers");
+        mainFrame = new Frame("Hyperbola drawers");
         mainFrame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         mainFrame.setResizable(false);
         mainFrame.setLayout(new GridBagLayout());
@@ -64,14 +71,16 @@ public class ParabolasWindow {
             }
         });
 
-        Panel rowBot = new Panel(new GridLayout(2, 3));
+        Panel rowBot = new Panel(new GridLayout(2, 4));
         rowBot.setSize(WINDOW_WIDTH, 60);
         viewTypeText.setEditable(false);
         numberOfDotsText.setEditable(false);
         parameterText.setEditable(false);
+        parameterBText.setEditable(false);
         rowBot.add(viewTypeText);
         rowBot.add(numberOfDotsText);
         rowBot.add(parameterText);
+        rowBot.add(parameterBText);
 
         viewTypeCheckbox.addItemListener(listener -> startDraw());
         rowBot.add(viewTypeCheckbox);
@@ -91,6 +100,14 @@ public class ParabolasWindow {
         parameterSlider.setPaintLabels(true);
         parameterSlider.addChangeListener(listener -> startDraw());
         rowBot.add(parameterSlider);
+
+        Dictionary<Integer, JLabel> labels4 = new Hashtable<>();
+        labels4.put(1, new JLabel("<html><font color=gray size=3>0.1"));
+        labels4.put(1000, new JLabel("<html><font color=gray size=3>100"));
+        parameterBSlider.setLabelTable(labels4);
+        parameterBSlider.setPaintLabels(true);
+        parameterBSlider.addChangeListener(listener -> startDraw());
+        rowBot.add(parameterBSlider);
 
         mainFrame.add(rowBot, constraints);
 
@@ -117,10 +134,10 @@ public class ParabolasWindow {
         cvHolder.add(controlPanel2);
         cvHolder.setSize(WINDOW_WIDTH, 600);
 
-        BestParabolaDrawer bestParabolaDrawer = new BestParabolaDrawer(CANVAS_WIDTH, CANVAS_HEIGHT);
-        NaiveParabolaDrawer naiveParabolaDrawer = new NaiveParabolaDrawer(CANVAS_WIDTH, CANVAS_HEIGHT);
-        bestCanvas = new ParabolaCanvas(bestParabolaDrawer);
-        naiveCanvas = new ParabolaCanvas(naiveParabolaDrawer);
+        HyperbolaDrawer bestHyperbolaDrawer = new BestHyperbolaDrawer(CANVAS_WIDTH, CANVAS_HEIGHT);
+        HyperbolaDrawer naiveHyperbolaDrawer = new NaIveHyperbolaDrawer(CANVAS_WIDTH, CANVAS_HEIGHT);
+        bestCanvas = new HyperbolaCanvas(bestHyperbolaDrawer);
+        naiveCanvas = new HyperbolaCanvas(naiveHyperbolaDrawer);
 
         constraints.gridy = 2;
         constraints.ipady = WINDOW_HEIGHT - 150;
@@ -132,17 +149,20 @@ public class ParabolasWindow {
         bestCanvas.setStateOfViewType(viewTypeCheckbox.getState());
         naiveCanvas.setStateOfViewType(viewTypeCheckbox.getState());
         numberOfDotsText.setText(numberOfDotsString + numberOfDotsSlider.getValue());
-        parameterText.setText(parameterString + parameterSlider.getValue() / 10.);
+        parameterText.setText(parameterAString + parameterSlider.getValue() / 10.);
+        parameterBText.setText(parameterBString + parameterBSlider.getValue() / 10.);
 
         controlPanel1.removeAll();
         controlPanel2.removeAll();
-        bestCanvas.parabolaDrawer.setParabola(
+        bestCanvas.hyperbolaDrawer.setHyperbola(
                 numberOfDotsSlider.getValue(),
-                parameterSlider.getValue() / 10.
+                parameterSlider.getValue() / 10.,
+                parameterBSlider.getValue() / 10.
         );
-        naiveCanvas.parabolaDrawer.setParabola(
+        naiveCanvas.hyperbolaDrawer.setHyperbola(
                 numberOfDotsSlider.getValue(),
-                parameterSlider.getValue() / 10.
+                parameterSlider.getValue() / 10.,
+                parameterBSlider.getValue() / 10.
         );
         controlPanel1.add(bestCanvas);
         controlPanel2.add(naiveCanvas);

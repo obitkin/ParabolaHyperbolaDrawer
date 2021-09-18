@@ -1,4 +1,4 @@
-package graphics.graph;
+package graphics.graph.parabola;
 
 import graphics.dto.Point;
 
