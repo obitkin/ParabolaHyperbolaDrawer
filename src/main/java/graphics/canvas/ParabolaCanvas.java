@@ -2,6 +2,7 @@ package graphics.canvas;
 
 import graphics.graph.ParabolaDrawer;
 import graphics.dto.Point;
+import lombok.Setter;
 
 import java.awt.*;
 import java.util.List;
@@ -9,25 +10,35 @@ import java.util.List;
 public class ParabolaCanvas extends Canvas {
 
     public ParabolaDrawer parabolaDrawer;
+    @Setter private Boolean stateOfViewType = false;
 
-    public ParabolaCanvas(int width, int height) {
+    public ParabolaCanvas(ParabolaDrawer parabolaDrawer) {
         setBackground(Color.WHITE);
-        setSize(width, height);
-        parabolaDrawer = new ParabolaDrawer(width, height);
+        setSize(parabolaDrawer.getWidth(), parabolaDrawer.getHeight());
+        this.parabolaDrawer = parabolaDrawer;
     }
 
     @Override
     public void paint(Graphics g) {
         Graphics2D g2;
         g2 = (Graphics2D) g;
-        System.out.println("Рисуем параболу");
         List<Point> dots = parabolaDrawer.drawParabola();
-        for (int i = 0; i < dots.size() - 1; i++) {
-            drawLine(g2, dots.get(i), dots.get(i + 1));
+        if (stateOfViewType) {
+            for (int i = 0; i < dots.size() - 1; i++) {
+                drawLine(g2, dots.get(i), dots.get(i + 1));
+            }
+        } else {
+            for (Point dot : dots) {
+                drawDot(g2, dot);
+            }
         }
     }
 
     private void drawLine(Graphics2D graphics2D, Point first, Point second) {
         graphics2D.drawLine(first.getX(), first.getY(), second.getX(), second.getY());
+    }
+
+    private void drawDot(Graphics2D graphics2D, Point point) {
+        graphics2D.drawOval(point.getX(), point.getY(), 3, 3);
     }
 }

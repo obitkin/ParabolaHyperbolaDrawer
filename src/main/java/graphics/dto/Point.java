@@ -18,9 +18,6 @@ public class Point {
         return (int) y;
     }
 
-    public Point revertY() {
-        return new Point(x, -y);
-    }
 
 }
 
