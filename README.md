@@ -1,1 +1,1 @@
-# Bezier-curve
+# Parabola-Hyperbola Drawer
