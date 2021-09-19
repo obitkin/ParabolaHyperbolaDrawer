@@ -1,5 +1,6 @@
 package curves.drawers.hyperbola;
 
+import curves.data.Parameters;
 import curves.data.Point;
 
 import java.awt.*;
@@ -12,12 +13,16 @@ import static java.lang.Math.sqrt;
 
 public class NaiveHyperbolaDrawer extends HyperbolaDrawer {
 
-    public NaiveHyperbolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A, double B) {
-        super(minX, maxX, shift, numberOfDots, A, B);
+    public NaiveHyperbolaDrawer(Parameters parameters, double A, double B) {
+        super(parameters, A, B);
     }
 
     @Override
     public List<Point> drawCurve() {
+        double maxX = parameters.getMaxX();
+        double minX = parameters.getMinX();
+        int numberOfDots = parameters.getNumberOfDots();
+
         List<Point> curve = new ArrayList<>();
         double x = minX;
         double y = sqrt(pow(B, 2) * pow(x, 2) - pow(A, 2) * pow(B, 2)) / A;

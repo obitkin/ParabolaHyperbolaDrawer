@@ -1,21 +1,19 @@
 package curves.drawers.parabola;
 
+import curves.data.Parameters;
 import curves.data.Point;
 import curves.drawers.Drawer;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class ParabolaDrawer extends Drawer {
 
-    protected int numberOfDots;
     protected double A;
 
-    public ParabolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A) {
-        super(minX, maxX, shift);
-        this.numberOfDots = numberOfDots;
+    public ParabolaDrawer(Parameters parameters, double A) {
+        super(parameters);
         this.A = A;
     }
 

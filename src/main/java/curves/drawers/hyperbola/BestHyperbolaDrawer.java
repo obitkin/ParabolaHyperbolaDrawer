@@ -1,5 +1,6 @@
 package curves.drawers.hyperbola;
 
+import curves.data.Parameters;
 import curves.data.Point;
 
 import java.awt.*;
@@ -10,12 +11,16 @@ import static java.lang.Math.*;
 
 public class BestHyperbolaDrawer extends HyperbolaDrawer {
 
-    public BestHyperbolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A, double B) {
-        super(minX, maxX, shift, numberOfDots, A, B);
+    public BestHyperbolaDrawer(Parameters parameters, double A, double B) {
+        super(parameters, A, B);
     }
 
     @Override
     public List<Point> drawCurve() {
+        double maxX = parameters.getMaxX();
+        double minX = parameters.getMinX();
+        int numberOfDots = parameters.getNumberOfDots();
+
         double sigmaMin = log(minX / A + sqrt(pow(minX / A, 2) - 1));
         double sigmaMax = log(maxX / A + sqrt(pow(maxX / A, 2) - 1));
         double sigmaDelta = (sigmaMax - sigmaMin) / numberOfDots;

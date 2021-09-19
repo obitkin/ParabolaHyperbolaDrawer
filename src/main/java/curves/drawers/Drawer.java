@@ -1,9 +1,8 @@
 package curves.drawers;
 
+import curves.data.Parameters;
 import curves.data.Point;
-import lombok.Getter;
 
-import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,14 +12,10 @@ public abstract class Drawer {
 
     public abstract List<Point> drawCurve();
 
-    protected double minX;
-    protected double maxX;
-    @Getter protected Dimension shift;
+    protected Parameters parameters;
 
-    public Drawer(double minX, double maxX, Dimension shift) {
-        this.minX = minX;
-        this.maxX = maxX;
-        this.shift = shift;
+    public Drawer(Parameters parameters) {
+        this.parameters = parameters;
     }
 
     protected List<List<Point>> shiftCurves(List<List<Point>> curves) {
@@ -32,8 +27,8 @@ public abstract class Drawer {
     private List<Point> shiftCurve(List<Point> curve) {
         return curve.stream()
                 .map(point -> new Point(
-                        point.getX() + getShift().getWidth(),
-                        point.getY() + getShift().getHeight())
+                        point.getX() + parameters.getShift().getWidth(),
+                        point.getY() + parameters.getShift().getHeight())
                 )
                 .collect(Collectors.toList());
     }

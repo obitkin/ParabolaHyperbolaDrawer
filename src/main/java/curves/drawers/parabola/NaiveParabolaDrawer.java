@@ -1,5 +1,6 @@
 package curves.drawers.parabola;
 
+import curves.data.Parameters;
 import curves.data.Point;
 
 import java.awt.*;
@@ -10,12 +11,16 @@ import static java.lang.Math.*;
 
 public class NaiveParabolaDrawer extends ParabolaDrawer {
 
-    public NaiveParabolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A) {
-        super(minX, maxX, shift, numberOfDots, A);
+    public NaiveParabolaDrawer(Parameters parameters, double A) {
+        super(parameters, A);
     }
 
     @Override
     public List<Point> drawCurve() {
+        double maxX = parameters.getMaxX();
+        double minX = parameters.getMinX();
+        int numberOfDots = parameters.getNumberOfDots();
+
         List<Point> curve = new ArrayList<>();
         double deltaX = (maxX - minX) / numberOfDots;
         double x = minX;

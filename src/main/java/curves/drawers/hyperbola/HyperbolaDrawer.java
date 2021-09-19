@@ -1,22 +1,20 @@
 package curves.drawers.hyperbola;
 
+import curves.data.Parameters;
 import curves.data.Point;
 import curves.drawers.Drawer;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class HyperbolaDrawer extends Drawer {
 
-    protected int numberOfDots;
     protected double A;
     protected double B;
 
-    public HyperbolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A, double B) {
-        super(minX, maxX, shift);
-        this.numberOfDots = numberOfDots;
+    public HyperbolaDrawer(Parameters parameters, double A, double B) {
+        super(parameters);
         this.A = A;
         this.B = B;
     }
