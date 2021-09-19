@@ -30,8 +30,9 @@ public class BestHyperbolaDrawer extends HyperbolaDrawer {
         double y = sqrt(pow(B, 2) * pow(x, 2) - pow(A, 2) * pow(B, 2)) / A;
         for (int i = 0; i < numberOfDots; i++) {
             curve.add(new Point(x, y));
+            double x_i = x;
             x = x * cosh(sigmaDelta) + (A / B) * y * sinh(sigmaDelta);
-            y = (B / A) * x * sinh(sigmaDelta) + y * cosh(sigmaDelta);
+            y = (B / A) * x_i * sinh(sigmaDelta) + y * cosh(sigmaDelta);
         }
         return curve;
     }

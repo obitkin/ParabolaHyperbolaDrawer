@@ -43,10 +43,10 @@ public class HyperWindow {
     Panel controlPanel2;
 
     Dimension canvasSize = new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
-    Dimension shift = new Dimension(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    Dimension shift = new Dimension(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 70);
 
     private Parameters getParameters(int numberOfDots) {
-        return new Parameters(parameterSlider.getValue() / 10., CANVAS_WIDTH / 2., shift, numberOfDots);
+        return new Parameters(parameterSlider.getValue() / 10., CANVAS_WIDTH / 2. - 20, shift, numberOfDots);
     }
 
     CurveCanvas bestCanvas = new CurveCanvas(null, canvasSize);
