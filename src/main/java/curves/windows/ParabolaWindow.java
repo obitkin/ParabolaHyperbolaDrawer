@@ -14,7 +14,7 @@ import java.util.Hashtable;
 
 import static java.lang.System.exit;
 
-public class ParWindow {
+public class ParabolaWindow {
 
     int WINDOW_HEIGHT = 680;
     int WINDOW_WIDTH = 1300;
@@ -50,7 +50,7 @@ public class ParWindow {
     CurveCanvas bestCanvas = new CurveCanvas(null, canvasSize);
     CurveCanvas naiveCanvas = new CurveCanvas(null, canvasSize);
 
-    public ParWindow(){
+    public ParabolaWindow(){
         prepareGUI();
     }
 

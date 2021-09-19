@@ -1,13 +1,13 @@
 package curves;
 
-import curves.windows.HyperWindow;
-import curves.windows.ParWindow;
+import curves.windows.HyperbolaWindow;
+import curves.windows.ParabolaWindow;
 
 public class Main {
 
     public static void main(String[] args) {
-        ParWindow parWindow = new ParWindow();
-        HyperWindow hyperWindow = new HyperWindow();
+        ParabolaWindow parWindow = new ParabolaWindow();
+        HyperbolaWindow hyperWindow = new HyperbolaWindow();
     }
 
 }

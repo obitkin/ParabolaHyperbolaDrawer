@@ -14,7 +14,7 @@ import java.util.Hashtable;
 
 import static java.lang.System.exit;
 
-public class HyperWindow {
+public class HyperbolaWindow {
 
     int WINDOW_HEIGHT = 680;
     int WINDOW_WIDTH = 1300;
@@ -53,7 +53,7 @@ public class HyperWindow {
     CurveCanvas naiveCanvas = new CurveCanvas(null, canvasSize);
 
 
-    public HyperWindow(){
+    public HyperbolaWindow(){
         prepareGUI();
     }
 
