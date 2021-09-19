@@ -13,11 +13,13 @@ public abstract class Drawer {
 
     public abstract List<Point> drawCurve();
 
-    @Getter protected Dimension size;
+    protected double minX;
+    protected double maxX;
     @Getter protected Dimension shift;
 
-    public Drawer(Dimension size, Dimension shift) {
-        this.size = size;
+    public Drawer(double minX, double maxX, Dimension shift) {
+        this.minX = minX;
+        this.maxX = maxX;
         this.shift = shift;
     }
 

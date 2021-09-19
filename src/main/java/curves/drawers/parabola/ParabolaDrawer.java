@@ -13,8 +13,8 @@ public abstract class ParabolaDrawer extends Drawer {
     protected int numberOfDots;
     protected double A;
 
-    public ParabolaDrawer(Dimension size, Dimension shift, int numberOfDots, double A) {
-        super(size, shift);
+    public ParabolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A) {
+        super(minX, maxX, shift);
         this.numberOfDots = numberOfDots;
         this.A = A;
     }

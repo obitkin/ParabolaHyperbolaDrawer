@@ -10,8 +10,15 @@ import java.util.stream.Collectors;
 
 public abstract class HyperbolaDrawer extends Drawer {
 
-    public HyperbolaDrawer(Dimension size, Dimension shift) {
-        super(size, shift);
+    protected int numberOfDots;
+    protected double A;
+    protected double B;
+
+    public HyperbolaDrawer(double minX, double maxX, Dimension shift, int numberOfDots, double A, double B) {
+        super(minX, maxX, shift);
+        this.numberOfDots = numberOfDots;
+        this.A = A;
+        this.B = B;
     }
 
     @Override
