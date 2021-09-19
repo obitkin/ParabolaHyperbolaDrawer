@@ -19,54 +19,48 @@ public class BestHyperbolaDrawer extends HyperbolaDrawer {
     @Override
     protected List<List<Point>> draw(int numberOfDots, double a, double b) {
         double sigmaMin = 0;
-        double sigmaMax = Math.PI / 2;
+        double tmp = centerX / a;
+        double sigmaMax = Math.log(tmp + Math.sqrt(tmp * tmp - 1));
         deltaSigma = (sigmaMax - sigmaMin) / numberOfDots;
         List<List<Point>> lines = new ArrayList<>(4);
-        x_1 = - a * Math.cosh(sigmaMin);
-        y_1 = b * Math.sinh(sigmaMin);
-        var line = getLine(numberOfDots, 1, 1);
+        x_1 = a;
+        y_1 = 0;
+        System.out.println("sigma MAX = " + sigmaMax);
+        System.out.println("delta sigma = " + deltaSigma);
+        var line = getLine(numberOfDots);
+        line.forEach(point -> System.out.println(point.x + " " + point.y));
+        System.out.println("sinh = " + Math.sinh(deltaSigma));
+        System.out.println("cosh = " + Math.cosh(deltaSigma));
         lines.add(line.stream().map(point -> new Point(point.x, point.y)).collect(Collectors.toList()));
         lines.add(line.stream().map(point -> new Point(point.x, -point.y)).collect(Collectors.toList()));
         lines.add(line.stream().map(point -> new Point(-point.x, point.y)).collect(Collectors.toList()));
         lines.add(line.stream().map(point -> new Point(-point.x, -point.y)).collect(Collectors.toList()));
-
-//        lines.add(getLine(numberOfDots, 1, -1));
-//        lines.add(getLine(numberOfDots, -1, 1));
-//        lines.add(getLine(numberOfDots, -1, -1));
-//        System.out.println("1 1");
-//        System.out.println(lines.get(0));
-//        System.out.println("1 -1");
-//        System.out.println(lines.get(0));
-//        System.out.println("-1 1");
-//        System.out.println(lines.get(2));
-//        System.out.println("-1 -1");
-//        System.out.println(lines.get(3));
         return lines;
     }
 
-    List<Point> getLine(int numberOfDots, int p1, int p2) {
+    List<Point> getLine(int numberOfDots) {
         List<Point> points = new ArrayList<>();
         double x = x_1;
         double y = y_1;
         points.add(new Point(x, y));
-        for (int i = 1; i < numberOfDots; i++) {
-            Point newPoint = nextPoint(x, y, p1, p2);
-            points.add(nextPoint(x, y, p1, p2));
+        for (int i = 0; i < numberOfDots; i++) {
+            Point newPoint = nextPoint(x, y);
+            points.add(newPoint);
             x = newPoint.x;
             y = newPoint.y;
         }
         return points;
     }
 
-    Point nextPoint(double x, double y, int p1, int p2) {
-        return new Point(p1 * nextX(x, y), p2 * nextY(x, y));
+    Point nextPoint(double x, double y) {
+        return new Point(nextX(x, y), nextY(x, y));
     }
 
     private double nextX(double x, double y) {
-        return (b * x) / (b * Math.cos(deltaSigma) - y * Math.sin(deltaSigma));
+        return x * Math.cosh(deltaSigma) + (a / b) * y * Math.sinh(deltaSigma);
     }
 
     private double nextY(double x, double y) {
-        return b * (y + b * Math.tan(deltaSigma)) / (b - y * Math.tan(deltaSigma));
+        return (b / a) * x * Math.sinh(deltaSigma) + y * Math.cosh(deltaSigma);
     }
 }
