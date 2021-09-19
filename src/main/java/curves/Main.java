@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         MeasureWindow measureWindow = new MeasureWindow();
-        //ParabolaWindow parWindow = new ParabolaWindow();
-        //HyperbolaWindow hyperWindow = new HyperbolaWindow();
+        ParabolaWindow parWindow = new ParabolaWindow();
+        HyperbolaWindow hyperWindow = new HyperbolaWindow();
     }
 
 }
