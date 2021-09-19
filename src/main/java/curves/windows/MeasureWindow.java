@@ -86,13 +86,13 @@ public class MeasureWindow {
             double B = Double.parseDouble(BText.getText());
             drawer = new BestHyperbolaDrawer(parameters, A, B);
         }
-        long currentTime = System.nanoTime();
+        long currentTime = System.currentTimeMillis();
         int numberOfMeasure = Integer.parseInt(numberOfMeasureText.getText());
         for (int i = 0; i < numberOfMeasure; i++) {
             System.out.println(drawer.drawCurve());
         }
-        long measuredTime = System.nanoTime() - currentTime;
-        result.setText("Общее: " + measuredTime / 1000 + " мс. Среднее:" + measuredTime/numberOfMeasure);
+        long measuredTime = System.currentTimeMillis() - currentTime;
+        result.setText("Общее: " + measuredTime + " мс.");
     }
 
 }
