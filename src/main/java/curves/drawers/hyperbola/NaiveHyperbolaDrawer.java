@@ -22,12 +22,12 @@ public class NaiveHyperbolaDrawer extends HyperbolaDrawer {
         double maxX = parameters.getMaxX();
         double minX = parameters.getMinX();
         int numberOfDots = parameters.getNumberOfDots();
+        int numberOfInterval = parameters.getNumberOfDots() - 1;
 
         List<Point> curve = new ArrayList<>();
         double x = minX;
         double y = sqrt(pow(B, 2) * pow(x, 2) - pow(A, 2) * pow(B, 2)) / A;
-        double deltaX = (maxX - minX) / numberOfDots;
-        curve.add(new Point(x, y));
+        double deltaX = (maxX - minX) / numberOfInterval;
         for (int i = 0; i < numberOfDots; i++) {
             curve.add(new Point(x, y));
             x += deltaX;

@@ -33,7 +33,6 @@ public class BestParabolaDrawer extends ParabolaDrawer {
             x = x + y * sigmaDelta + A * sigmaDelta * sigmaDelta;
             y = y + 2 * A * sigmaDelta;
         }
-        System.out.println(curve);
         return curve;
     }
 

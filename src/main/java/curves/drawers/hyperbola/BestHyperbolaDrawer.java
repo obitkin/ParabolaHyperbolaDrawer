@@ -20,18 +20,18 @@ public class BestHyperbolaDrawer extends HyperbolaDrawer {
         double maxX = parameters.getMaxX();
         double minX = parameters.getMinX();
         int numberOfDots = parameters.getNumberOfDots();
+        int numberOfInterval = parameters.getNumberOfDots() - 1;
 
+        List<Point> curve = new ArrayList<>();
         double sigmaMin = log(minX / A + sqrt(pow(minX / A, 2) - 1));
         double sigmaMax = log(maxX / A + sqrt(pow(maxX / A, 2) - 1));
-        double sigmaDelta = (sigmaMax - sigmaMin) / numberOfDots;
-        List<Point> curve = new ArrayList<>();
+        double sigmaDelta = (sigmaMax - sigmaMin) / numberOfInterval;
         double x = minX;
         double y = sqrt(pow(B, 2) * pow(x, 2) - pow(A, 2) * pow(B, 2)) / A;
-        curve.add(new Point(x, y));
         for (int i = 0; i < numberOfDots; i++) {
+            curve.add(new Point(x, y));
             x = x * cosh(sigmaDelta) + (A / B) * y * sinh(sigmaDelta);
             y = (B / A) * x * sinh(sigmaDelta) + y * cosh(sigmaDelta);
-            curve.add(new Point(x, y));
         }
         return curve;
     }
