@@ -1,11 +1,12 @@
 package curves.windows;
 
 import curves.canvas.CurveCanvas;
+import curves.data.Parameters;
 import curves.drawers.Drawer;
 import curves.drawers.hyperbola.BestHyperbolaDrawer;
+import curves.drawers.parabola.BestParabolaDrawer;
+import curves.drawers.parabola.NaiveParabolaDrawer;
 import graphics.canvas.ParabolaCanvas;
-import graphics.graph.parabola.BestParabolaDrawer;
-import graphics.graph.parabola.NaiveParabolaDrawer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,9 +42,11 @@ public class ParWindow {
     Panel controlPanel1;
     Panel controlPanel2;
 
-    ParabolaCanvas bestCanvas;
-    ParabolaCanvas naiveCanvas;
+    Dimension canvasSize = new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
+    Dimension shift = new Dimension(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
 
+    CurveCanvas bestCanvas = new CurveCanvas(null, canvasSize);
+    CurveCanvas naiveCanvas = new CurveCanvas(null, canvasSize);
 
     public ParWindow(){
         prepareGUI();
@@ -112,18 +115,13 @@ public class ParWindow {
         Panel cvHolder = new Panel(new GridLayout(1, 2));
         controlPanel1 = new Panel();
         controlPanel1.setLayout(new FlowLayout());
-        controlPanel1.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
+        controlPanel1.setSize(canvasSize);
         controlPanel2 = new Panel();
         controlPanel2.setLayout(new FlowLayout());
-        controlPanel2.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
+        controlPanel2.setSize(canvasSize);
         cvHolder.add(controlPanel1);
         cvHolder.add(controlPanel2);
         cvHolder.setSize(WINDOW_WIDTH, 600);
-
-        BestParabolaDrawer bestParabolaDrawer = new BestParabolaDrawer(CANVAS_WIDTH, CANVAS_HEIGHT);
-        NaiveParabolaDrawer naiveParabolaDrawer = new NaiveParabolaDrawer(CANVAS_WIDTH, CANVAS_HEIGHT);
-        bestCanvas = new ParabolaCanvas(bestParabolaDrawer);
-        naiveCanvas = new ParabolaCanvas(naiveParabolaDrawer);
 
         constraints.gridy = 2;
         constraints.ipady = WINDOW_HEIGHT - 150;
@@ -139,14 +137,12 @@ public class ParWindow {
 
         controlPanel1.removeAll();
         controlPanel2.removeAll();
-        bestCanvas.parabolaDrawer.setParabola(
-                numberOfDotsSlider.getValue(),
-                parameterSlider.getValue() / 10.
-        );
-        naiveCanvas.parabolaDrawer.setParabola(
-                numberOfDotsSlider.getValue(),
-                parameterSlider.getValue() / 10.
-        );
+
+        Parameters parameters = new Parameters(0, CANVAS_WIDTH / 2. - 100, shift, numberOfDotsSlider.getValue());
+
+        bestCanvas.setDrawer(new BestParabolaDrawer(parameters, parameterSlider.getValue() / 10.));
+        naiveCanvas.setDrawer(new NaiveParabolaDrawer(parameters, parameterSlider.getValue() / 10.));
+
         controlPanel1.add(bestCanvas);
         controlPanel2.add(naiveCanvas);
     }
