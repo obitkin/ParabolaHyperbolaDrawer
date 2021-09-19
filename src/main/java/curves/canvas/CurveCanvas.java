@@ -27,7 +27,7 @@ public class CurveCanvas extends Canvas {
         g2 = (Graphics2D) g;
         List<List<Point>> curves = drawer.drawCurves();
         for (var curve : curves) {
-            if (stateOfViewType) {
+            if (!stateOfViewType) {
                 for (int i = 0; i < curve.size() - 1; i++) {
                     drawLine(g2, curve.get(i), curve.get(i + 1));
                 }

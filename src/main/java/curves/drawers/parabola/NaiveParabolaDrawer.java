@@ -20,16 +20,16 @@ public class NaiveParabolaDrawer extends ParabolaDrawer {
         double maxX = parameters.getMaxX();
         double minX = parameters.getMinX();
         int numberOfDots = parameters.getNumberOfDots();
+        int numberOfInterval = parameters.getNumberOfDots() - 1;
 
         List<Point> curve = new ArrayList<>();
-        double deltaX = (maxX - minX) / numberOfDots;
+        double deltaX = (maxX - minX) / numberOfInterval;
         double x = minX;
         double y = 2 * sqrt(A * x);
-        curve.add(new Point(x, y));
         for (int i = 0; i < numberOfDots; i++) {
+            curve.add(new Point(x, y));
             x += deltaX;
             y = 2 * sqrt(A * x);
-            curve.add(new Point(x, y));
         }
         return curve;
     }

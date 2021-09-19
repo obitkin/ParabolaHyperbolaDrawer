@@ -2,11 +2,8 @@ package curves.windows;
 
 import curves.canvas.CurveCanvas;
 import curves.data.Parameters;
-import curves.drawers.Drawer;
-import curves.drawers.hyperbola.BestHyperbolaDrawer;
 import curves.drawers.parabola.BestParabolaDrawer;
 import curves.drawers.parabola.NaiveParabolaDrawer;
-import graphics.canvas.ParabolaCanvas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +40,12 @@ public class ParWindow {
     Panel controlPanel2;
 
     Dimension canvasSize = new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
-    Dimension shift = new Dimension(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    int SHIFT_X = 50;
+    Dimension shift = new Dimension(SHIFT_X, CANVAS_HEIGHT / 2 - 70);
+
+    private Parameters getParameters(int numberOfDots) {
+        return new Parameters(0, CANVAS_HEIGHT - SHIFT_X - 70, shift, numberOfDots);
+    }
 
     CurveCanvas bestCanvas = new CurveCanvas(null, canvasSize);
     CurveCanvas naiveCanvas = new CurveCanvas(null, canvasSize);
@@ -138,7 +140,7 @@ public class ParWindow {
         controlPanel1.removeAll();
         controlPanel2.removeAll();
 
-        Parameters parameters = new Parameters(0, CANVAS_WIDTH / 2. - 100, shift, numberOfDotsSlider.getValue());
+        Parameters parameters = getParameters(numberOfDotsSlider.getValue());
 
         bestCanvas.setDrawer(new BestParabolaDrawer(parameters, parameterSlider.getValue() / 10.));
         naiveCanvas.setDrawer(new NaiveParabolaDrawer(parameters, parameterSlider.getValue() / 10.));

@@ -20,19 +20,20 @@ public class BestParabolaDrawer extends ParabolaDrawer {
         double maxX = parameters.getMaxX();
         double minX = parameters.getMinX();
         int numberOfDots = parameters.getNumberOfDots();
+        int numberOfInterval = parameters.getNumberOfDots() - 1;
 
         List<Point> curve = new ArrayList<>();
         double sigmaMin = sqrt(minX / A);
         double sigmaMax = sqrt(maxX / A);
-        double sigmaDelta = (sigmaMax - sigmaMin) / numberOfDots;
+        double sigmaDelta = (sigmaMax - sigmaMin) / numberOfInterval;
         double x = minX;
         double y = 2 * sqrt(A * x);
-        curve.add(new Point(x, y));
         for (int i = 0; i < numberOfDots; i++) {
+            curve.add(new Point(x, y));
             x = x + y * sigmaDelta + A * sigmaDelta * sigmaDelta;
             y = y + 2 * A * sigmaDelta;
-            curve.add(new Point(x, y));
         }
+        System.out.println(curve);
         return curve;
     }
 
