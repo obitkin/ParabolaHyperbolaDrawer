@@ -3,7 +3,9 @@ package curves.windows;
 import curves.data.Parameters;
 import curves.drawers.Drawer;
 import curves.drawers.hyperbola.BestHyperbolaDrawer;
+import curves.drawers.hyperbola.NaiveHyperbolaDrawer;
 import curves.drawers.parabola.BestParabolaDrawer;
+import curves.drawers.parabola.NaiveParabolaDrawer;
 
 import java.awt.*;
 
@@ -14,7 +16,9 @@ public class MeasureWindow {
     int WINDOW_WIDTH = 500;
     int WINDOW_HEIGHT = 270;
 
-    JComboBox<String> curveType = new JComboBox<>(new String[] {"Hyperbola", "Parabola"});
+    JComboBox<String> curveType = new JComboBox<>(new String[] {
+            "Hyperbola", "Parabola", "Hyperbola Naive", "Parabola Naive"
+    });
     JLabel curveTypeLabel = new JLabel("Выберите тип кривой");
     JLabel minXLabel = new JLabel("Минимальное значение X > 0");
     JTextField minXText = new JTextField();
@@ -60,7 +64,7 @@ public class MeasureWindow {
         panel.add(result);
 
         curveType.addItemListener(listener -> {
-            if (listener.getItem().equals("Parabola")) {
+            if (listener.getItem().toString().contains("Parabola")) {
                 BText.setEnabled(false);
             } else {
                 BText.setEnabled(true);
@@ -82,14 +86,22 @@ public class MeasureWindow {
         Parameters parameters = new Parameters(minX, maxX, null, numberOfDots);
         if (curveType.getSelectedItem().toString().equals("Parabola")) {
             drawer = new BestParabolaDrawer(parameters, A);
-        } else {
+        } else if (curveType.getSelectedItem().toString().equals("Hyperbola")) {
             double B = Double.parseDouble(BText.getText());
             drawer = new BestHyperbolaDrawer(parameters, A, B);
+        } else if (curveType.getSelectedItem().toString().equals("Hyperbola Naive")) {
+            double B = Double.parseDouble(BText.getText());
+            drawer = new NaiveHyperbolaDrawer(parameters, A, B);
+        } else if (curveType.getSelectedItem().toString().equals("Parabola Naive")) {
+            drawer = new NaiveParabolaDrawer(parameters, A);
+        } else {
+            throw new RuntimeException("Cannot init drawer");
         }
         long currentTime = System.currentTimeMillis();
         int numberOfMeasure = Integer.parseInt(numberOfMeasureText.getText());
         for (int i = 0; i < numberOfMeasure; i++) {
-            System.out.println(drawer.drawCurve());
+            drawer.drawCurve();
+            //System.out.println(drawer.drawCurve());
         }
         long measuredTime = System.currentTimeMillis() - currentTime;
         result.setText("Общее: " + measuredTime + " мс.");
