@@ -1,1 +1,1 @@
-# Parabola-Hyperbola Drawer
+# Parabola-Hyperbola Drawer v 1.2
